@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Rules\Base64;
+use App\Rules\Base64MaxSize;
+use App\Services\Uteis;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -50,7 +54,8 @@ class UserController extends Controller
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email|max:100',
             'password' => 'required|string|min:6|max:100',
-            'phone' => 'required|numeric|digits_between:10,11'
+            'phone' => 'required|numeric|digits_between:10,11',
+            'image' => ['required', new Base64, new Base64MaxSize]
         ]);
 
         if ($validation->fails()) {
@@ -66,6 +71,7 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
             $user->phone = $request->phone;
+            $user->image = $request->image;
 
             $user->save();
 
@@ -125,7 +131,8 @@ class UserController extends Controller
                 'name' => 'required|string|max:100',
                 'email' => 'required|email|unique:users,email|max:100',
                 'password' => 'required|string|min:6|max:100',
-                'phone' => 'required|numeric|digits_between:10,11'
+                'phone' => 'required|numeric|digits_between:10,11',
+                'image' => ['required', new Base64, new Base64MaxSize]
             ]);
 
             if ($validation->fails()) {
@@ -148,6 +155,7 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = password_hash($request->password, PASSWORD_BCRYPT);
             $user->phone = $request->phone;
+            $user->image = $request->image;
 
             $user->save();
 

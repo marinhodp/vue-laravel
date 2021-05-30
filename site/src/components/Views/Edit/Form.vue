@@ -34,6 +34,11 @@
       <Button 
         label="Save" 
         @click="submitForm" />
+      <FeedBackMessage 
+        v-if="feedbackMessage.display"
+        :success="feedbackMessage.success"
+        :messages="feedbackMessage.content" />
+      <Loading v-if="loading" />
     </form>
   </section>
 </template>
@@ -44,6 +49,8 @@ import TextInput from '../../Generic/TextInput'
 import FileInput from '../../Generic/FileInput'
 import Button from '../../Generic/Button'
 import Thumbnail from '../../Generic/Thumbnail'
+import FeedBackMessage from '../../Generic/FeedBackMessage'
+import Loading from '../../Generic/Loading'
 
 export default {
   name: 'EditForm',
@@ -51,7 +58,9 @@ export default {
     TextInput,
     FileInput,
     Button,
-    Thumbnail
+    Thumbnail,
+    FeedBackMessage,
+    Loading
   },
    data() {
     return {
@@ -61,7 +70,13 @@ export default {
         password: '',
         phone: '',
         image: ''
-      }
+      },
+      feedbackMessage: {
+        display: false,
+        success: false,
+        content: {}
+      },
+      loading: false
     }
   },
   created() {
@@ -79,12 +94,18 @@ export default {
       this.form[data.name] = data.value
     },
     submitForm: function() {
+      this.feedbackMessage.display = false
+      this.loading = true
       let id = this.$route.params.id
       User.edit(this.form, id, (response) => {
+        this.feedbackMessage.display = true
+        this.loading = false
         if (response.success) {
-          console.log('ok')
+          this.feedbackMessage.success = true
+          this.feedbackMessage.content = 'User updated successfully!'
         } else {
-          console.log(response.errors)
+          this.feedbackMessage.success = false
+          this.feedbackMessage.content = response.errors.errors
         }
       })
     }

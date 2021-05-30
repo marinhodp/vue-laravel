@@ -26,3 +26,10 @@ services:
       - '8001:80'
     volumes:
       - ../api:/var/www/html
+  site:
+    container_name: site
+    build: ./site
+    ports:
+      - '8003:80'
+    volumes:
+      - ../site:/usr/local/apache2/htdocs

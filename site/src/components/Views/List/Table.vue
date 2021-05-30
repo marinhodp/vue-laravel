@@ -1,6 +1,6 @@
 <template>
   <section class="ListTable">
-    <table>
+    <table v-if="!loading">
       <thead>
         <tr>
           <th>Photo</th>
@@ -25,7 +25,8 @@
           </td>
         </tr>
       </tbody>
-    </table> 
+    </table>
+    <Loading v-if="loading" /> 
   </section>
 </template>
 
@@ -34,16 +35,19 @@ import User from '../../../services/User'
 import Button from '../../Generic/Button'
 import router from '../../../router'
 import Thumbnail from '../../Generic/Thumbnail'
+import Loading from '../../Generic/Loading'
 
 export default {
   name: 'ListTable',
   components: {
     Button,
-    Thumbnail
+    Thumbnail,
+    Loading
   },
    data() {
     return {
-      users: []
+      users: [],
+      loading: false
     }
   },
   created() {
@@ -64,9 +68,10 @@ export default {
       }
     },
     getUsers: function() {
+      this.loading = true
       User.list((response) => {
         this.users = response.data 
-        console.log(response)
+        this.loading = false
       })
     }
   }

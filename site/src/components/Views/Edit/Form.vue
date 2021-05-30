@@ -1,6 +1,6 @@
 <template>
   <section class="EditForm">
-    <form>
+    <form v-if="!loadingInitial">
       <TextInput 
         name="name"
         label="Name"
@@ -40,6 +40,7 @@
         :messages="feedbackMessage.content" />
       <Loading v-if="loading" />
     </form>
+    <Loading v-if="loadingInitial" />
   </section>
 </template>
 
@@ -76,7 +77,8 @@ export default {
         success: false,
         content: {}
       },
-      loading: false
+      loading: false,
+      loadingInitial: false
     }
   },
   created() {
@@ -84,10 +86,11 @@ export default {
   },
   methods: {
     getUser: function() {
+      this.loadingInitial = true
       let id = this.$route.params.id
       User.get(id, (response) => {
         this.form = response.data 
-        console.log(response)
+        this.loadingInitial = false
       })
     },
     updateForm: function(data) {

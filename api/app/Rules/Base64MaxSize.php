@@ -32,6 +32,6 @@ class Base64MaxSize implements Rule
 
     public function message()
     {
-        return 'O '.$this->attributeName.' não pode ser maior que '.$this->maxSizeMB.'MB.';
+        return 'The '.$this->attributeName.' cannot be larger than '.$this->maxSizeMB.'MB.';
     }
 }

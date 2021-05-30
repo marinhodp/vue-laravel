@@ -27,6 +27,6 @@ class Base64 implements Rule
 
     public function message()
     {
-        return 'O '.$this->attributeName.' não está no formato base64.';
+        return 'The '.$this->attributeName.' is not in base64 format.';
     }
 }

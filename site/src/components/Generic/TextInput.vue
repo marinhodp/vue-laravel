@@ -77,5 +77,7 @@ export default {
   font-size: 14px;
   margin-right: 5px;
   font-weight: bold;
+  width: 75px;
+  display: inline-block;
 }
 </style>

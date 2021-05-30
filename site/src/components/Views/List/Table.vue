@@ -15,8 +15,14 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
-          <td><Button label="Edit" :id="user.id" @click="editOne" /></td>
-          <td><Button label="Delete" :id="user.id" @click="deleteOne" /></td>
+          <td>
+            <div class="button-wrapper">
+              <Button icon="edit" bStyle="icon-only" :id="user.id" @click="editOne" />
+            </div>
+            <div class="button-wrapper">
+              <Button icon="delete" bStyle="icon-only" :id="user.id" @click="deleteOne" />
+            </div>
+          </td>
         </tr>
       </tbody>
     </table> 
@@ -68,4 +74,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ListTable{
+  table {
+    margin: 0 auto;
+    td {
+      padding: 0 5px;
+      .button-wrapper {
+        margin: 0 2px;
+        display: inline-block;
+      }
+    }
+  }
+  margin-bottom: 50px;
+}
 </style>

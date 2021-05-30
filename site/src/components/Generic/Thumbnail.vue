@@ -24,6 +24,7 @@ export default {
     background-repeat: no-repeat, repeat;
     background-position: center;
     background-size: cover;
+    border: 1px solid #e6e6e6;
   }
 }
 </style>

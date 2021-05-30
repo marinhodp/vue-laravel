@@ -40,4 +40,23 @@ export default {
       callback(msg)
     })
   },
+  delete(endpoint, id, callback) {
+    let url = `${API_URL}/${endpoint}/${id}`
+    axios.delete(url, {})
+    .then((response) => {
+      let msg = {
+        'success': true,
+        'data': response.data
+      }
+      callback(msg)
+    })
+    .catch((errors) => {
+      let response = errors.response.request.responseText
+      let msg = {
+        'success': false,
+        'errors': JSON.parse(response)
+      }
+      callback(msg)
+    })
+  },
 }

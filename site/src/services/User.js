@@ -12,5 +12,11 @@ export default {
     Service.post(endpoint, data, (response) => {
       callback(response)
     })
+  },
+  remove(id, callback) {
+    let endpoint = 'user'
+    Service.delete(endpoint, id, (response) => {
+      callback(response)
+    })
   }
 }

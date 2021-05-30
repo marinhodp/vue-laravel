@@ -15,6 +15,8 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
+          <td><Button label="Edit" :id="user.id" @click="editOne" /></td>
+          <td><Button label="Delete" :id="user.id" @click="deleteOne" /></td>
         </tr>
       </tbody>
     </table> 
@@ -23,22 +25,40 @@
 
 <script>
 import User from '../../../services/User'
+import Button from '../../Generic/Button'
 
 export default {
   name: 'ListTable',
-  components: {},
+  components: {
+    Button
+  },
    data() {
     return {
       users: []
     }
   },
   created() {
-    User.list((response) => {
-      this.users = response.data 
-      console.log(response)
-    })
+    this.getUsers()
   },
   methods: {
+    editOne: function(id) {
+      console.log('editOne')
+      console.log(id)
+    },
+    deleteOne: function(id) {
+      if (window.confirm('Do you really want to remove this user?')) {
+        User.remove(id, (response) => {
+          console.log(response)
+          this.getUsers()
+        })
+      }
+    },
+    getUsers: function() {
+      User.list((response) => {
+        this.users = response.data 
+        console.log(response)
+      })
+    }
   }
 }
 </script>

@@ -11,7 +11,7 @@
       </thead>
       <tbody>
         <tr v-for="user in this.users" v-bind:key="user.id">
-          <td><img :src="user.image" /></td>
+          <td><Thumbnail :src="user.image" /></td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
@@ -27,11 +27,13 @@
 import User from '../../../services/User'
 import Button from '../../Generic/Button'
 import router from '../../../router'
+import Thumbnail from '../../Generic/Thumbnail'
 
 export default {
   name: 'ListTable',
   components: {
-    Button
+    Button,
+    Thumbnail
   },
    data() {
     return {

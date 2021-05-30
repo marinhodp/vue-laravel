@@ -28,8 +28,9 @@
         name="image"
         label="Photo" 
         @change-file="updateForm" />
-      <img :src="form.image" />
-      <br />
+      <div class="thumbnail-wrapper" v-if="form.image">
+        <Thumbnail :src="form.image" />
+      </div>
       <Button 
         label="Save" 
         @click="submitForm" />
@@ -42,13 +43,15 @@ import User from '../../../services/User'
 import TextInput from '../../Generic/TextInput'
 import FileInput from '../../Generic/FileInput'
 import Button from '../../Generic/Button'
+import Thumbnail from '../../Generic/Thumbnail'
 
 export default {
   name: 'EditForm',
   components: {
     TextInput,
     FileInput,
-    Button
+    Button,
+    Thumbnail
   },
    data() {
     return {
@@ -90,4 +93,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.thumbnail-wrapper {
+  margin: 0 auto;
+  display: block;
+  max-width: 100px;
+  margin-bottom: 20px;
+}
 </style>

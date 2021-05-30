@@ -1,17 +1,18 @@
 <template>
   <section class="ListTable">
-    <table v-if="!loading">
+    <table v-if="!loading" cellspacing="0" cellpadding="0">
       <thead>
         <tr>
           <th>Photo</th>
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in this.users" v-bind:key="user.id">
-          <td><Thumbnail :src="user.image" /></td>
+          <td><div class="thumb-wrapper"><Thumbnail :src="user.image" /></div></td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
@@ -82,8 +83,21 @@ export default {
 .ListTable{
   table {
     margin: 0 auto;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+    thead {
+      background-color: #42b983;
+      color: #fff;
+      border: none;
+      th {
+        padding: 15px;
+      }
+    }
     td {
-      padding: 0 5px;
+      padding: 0 15px;
+      border-top: 1px solid #dee2e6;
+      .thumb-wrapper {
+        padding: 5px 0;
+      }
       .button-wrapper {
         margin: 0 2px;
         display: inline-block;

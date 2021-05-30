@@ -129,7 +129,7 @@ class UserController extends Controller
         } else {
             $validation = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
-                'email' => 'required|email|unique:users,email|max:100',
+                'email' => 'required|email|max:100|unique:users,email,'.$id,
                 'password' => 'required|string|min:6|max:100',
                 'phone' => 'required|numeric|digits_between:10,11',
                 'image' => ['required', new Base64, new Base64MaxSize]

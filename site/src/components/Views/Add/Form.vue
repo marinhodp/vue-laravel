@@ -3,27 +3,27 @@
     <form>
       <TextInput 
         name="name"
-        label="Name"
+        label="Name*"
         type="text" 
         @change-text="updateForm" />
       <TextInput 
         name="email"
-        label="Email"
+        label="Email*"
         type="text" 
         @change-text="updateForm" />
       <TextInput 
         name="password"
-        label="Password"
+        label="Password*"
         type="password" 
         @change-text="updateForm" />
       <TextInput 
         name="phone"
-        label="Phone"
+        label="Phone*"
         type="text"
         @change-text="updateForm" />
       <FileInput 
         name="image"
-        label="Photo" 
+        label="Photo*" 
         @change-file="updateForm" />
       <div class="thumbnail-wrapper" v-if="form.image">
         <Thumbnail :src="form.image" />

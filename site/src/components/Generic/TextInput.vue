@@ -9,6 +9,7 @@
         :type="type ? type : 'text'" 
         :name="name" 
         class="text-input"
+        :value="value"
         v-on:change="onChange" />
     </div>
 </template>
@@ -32,6 +33,10 @@ export default {
         let acceptedValues = ['text', 'password']
         return acceptedValues.includes(value)
       }
+    },
+    value: {
+      type: String,
+      required: false
     }
   },
   data() {

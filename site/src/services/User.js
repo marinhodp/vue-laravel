@@ -18,5 +18,17 @@ export default {
     Service.delete(endpoint, id, (response) => {
       callback(response)
     })
-  }
+  },
+  get(id, callback) {
+    let endpoint = 'user'
+    Service.getOne(endpoint, id, (response) => {
+      callback(response)
+    })
+  },
+  edit(data, id, callback) {
+    let endpoint = 'user'
+    Service.edit(endpoint, data, id, (response) => {
+      callback(response)
+    })
+  },
 }

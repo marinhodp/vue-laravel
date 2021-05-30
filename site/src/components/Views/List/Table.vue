@@ -26,6 +26,7 @@
 <script>
 import User from '../../../services/User'
 import Button from '../../Generic/Button'
+import router from '../../../router'
 
 export default {
   name: 'ListTable',
@@ -44,6 +45,7 @@ export default {
     editOne: function(id) {
       console.log('editOne')
       console.log(id)
+      router.push(`/edit/${id}`)
     },
     deleteOne: function(id) {
       if (window.confirm('Do you really want to remove this user?')) {

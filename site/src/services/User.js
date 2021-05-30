@@ -6,5 +6,11 @@ export default {
     Service.get(endpoint, (response) => {
       callback(response)
     })
+  },
+  save(data, callback) {
+    let endpoint = 'user'
+    Service.post(endpoint, data, (response) => {
+      callback(response)
+    })
   }
 }

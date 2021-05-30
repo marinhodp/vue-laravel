@@ -4,13 +4,13 @@
     type="button"
     :data-id="id"
     v-on:click="onClick">
-    <Icon :name="icon" class="icon" v-if="icon"/>
+    <!-- <Icon :name="icon" class="icon" v-if="icon"/> -->
     <span class="label">{{ label }}</span>
 </button>
 </template>
 
 <script>
-import Icon from './Icon'
+// import Icon from './Icon'
 
 export default {
   name: 'Button',
@@ -19,17 +19,17 @@ export default {
       type: String,
       required: true
     },
-    icon: {
-      type: String,
-      required: false
-    },
+    // icon: {
+    //   type: String,
+    //   required: false
+    // },
     id: {
       type: String,
       required: false
     }
   },
   components: {
-    Icon  
+    // Icon  
   },
   methods: {
     onClick: function(ev) {

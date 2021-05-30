@@ -1,5 +1,19 @@
 <template>
   <div class="add">
-    <h1>This is an add page</h1>
+    <Form />
   </div>
 </template>
+
+<script>
+import Form from '@/components/Views/Add/Form.vue'
+
+export default {
+  name: 'Add',
+  components: {
+    Form
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+</style>

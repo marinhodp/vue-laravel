@@ -1,16 +1,16 @@
 <template>
-    <div>
-      <label 
-        :for="name" 
-        class="text-input-label">
-        {{ label }}:
-      </label>
-      <input 
-        :type="type ? type : 'text'" 
-        :name="name" 
-        class="text-input"
-        v-on:change="onChange" />
-    </div>
+  <div>
+    <label 
+      :for="name" 
+      class="file-input-label">
+      {{ label }}:
+    </label>
+    <input 
+      type="file" 
+      :name="name" 
+      class="file-input"
+      v-on:change="onChange" />
+  </div>
 </template>
 
 <script>
@@ -24,14 +24,6 @@ export default {
     label: {
       type: String,
       required: true
-    },
-    type: {
-      type: String,
-      required: false,
-      validator: value => {
-        let acceptedValues = ['text', 'password']
-        return acceptedValues.includes(value)
-      }
     }
   },
   data() {
@@ -41,11 +33,16 @@ export default {
   methods: {
     onChange: function(ev) {
       if (ev) {
-        let data = {
-          name: ev.target.name,
-          value: ev.target.value
+        let file = ev.target.files[0]
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onloadend = () => {
+          let data = {
+            name: ev.target.name,
+            value: reader.result
+          }
+          this.$emit('change-file', data)
         }
-        this.$emit('change-text', data)
       }
     },
   }
@@ -53,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.text-input {
+.file-input {
   border: none;
   border-bottom: 2px solid;
   background-color: transparent;
@@ -67,7 +64,7 @@ export default {
   width: 100%;
   max-width: 220px;
 }
-.text-input-label {
+.file-input-label {
   color: #000;
   font-size: 14px;
   margin-right: 5px;
